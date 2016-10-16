@@ -957,7 +957,9 @@ Return value is a list of interpolatingp for all controllers, so (null (some #'i
           joints avs tms  (tm (ros::time -1)) link-coords-list
           (org-av (send robot :angle-vector))
           (dae-link-list
-           (send self :find-descendants-dae-links (send robot move-arm :root-link))))
+           (if (equal move-arm :arms)
+               (flatten (mapcar #'(lambda (rl) (send self :find-descendants-dae-links rl)) (send robot move-arm :root-link)))
+           (send self :find-descendants-dae-links (send robot move-arm :root-link)))))
      ;; JointTrajectory to angle-vector
      (if joint-trajectory
          (setq joint-trajectory-points (send joint-trajectory :points)

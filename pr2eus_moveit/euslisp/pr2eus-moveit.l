@@ -43,7 +43,7 @@
                                          (send robot :rarm :joint-list)))
                )
          (list :arms-torso ;; can not use inverse-kinematics
-               (cons :group-name "arms_and_torso")
+               (cons :group-name "whole_body")
                (cons :target-link
                      (list (send self :search-link-from-name "l_wrist_roll_link")
                            (send self :search-link-from-name "r_wrist_roll_link")))
